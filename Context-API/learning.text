@@ -1,0 +1,6 @@
+all hail to debug media for simple and crisp explanation
+------------------------------
+context is very easy to learn and less verbose when compared to redux
+also it cannot be considered as a fully fledged state management library , and 
+mostly as a technique to store global values for acessing by diff components in 
+the component tree without prop drilling . 
