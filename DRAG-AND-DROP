@@ -1,0 +1,80 @@
+import React, { useState } from 'react';
+
+const DragDropDiv = () => {
+  const [dropped, setDropped] = useState(false);
+
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData('text/plain', 'dragged-box');
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault(); // must allow drop
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData('text/plain');
+    if (data === 'dragged-box') {
+      setDropped(true);
+    }
+  };
+
+  return (
+    <div style={{ padding: '40px' }}>
+      {!dropped && (
+        <div
+          draggable
+          onDragStart={handleDragStart}
+          style={{
+            width: '100px',
+            height: '100px',
+            background: '#5cdb95',
+            color: '#05386b',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            cursor: 'grab',
+            borderRadius: '8px'
+          }}
+        >
+          Drag me
+        </div>
+      )}
+
+      <div
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        style={{
+          marginTop: '30px',
+          width: '300px',
+          height: '150px',
+          border: '2px dashed gray',
+          borderRadius: '10px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        {dropped ? (
+          <div
+            style={{
+              width: '100px',
+              height: '100px',
+              background: '#5cdb95',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: '8px'
+            }}
+          >
+            Dropped!
+          </div>
+        ) : (
+          'Drop here'
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default DragDropDiv;
